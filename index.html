@@ -1,35 +1,57 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Rock Paper Scissor</h1>
+  <div class="game-container">
+    <h1>Rock Scissors Paper</h1>
+
+    <div class="score-board">
+      <div>
+        <h2>Player</h2>
+        <span id="player-score">0</span>
+      </div>
+      <div>
+        <h2>Computer</h2>
+        <span id="computer-score">0</span>
+      </div>
+    </div>
+
+    <p id="message">Choose your move</p>
+
     <div class="choices">
-         <div class="choices"><img src="rock.png" alt="rock"/></div>
-         <div class="choices"><img src="paper.png" alt="paper"/></div>
-         <div class="choices"><img src="scissors.png" alt="scissors"/></div>
+      <button class="choice" data-move="rock">
+        <img src="images/rock.png" alt="Rock">
+      </button>
+
+      <button class="choice" data-move="paper">
+        <img src="images/scissor.png" alt="Paper">
+      </button>
+
+      <button class="choice" data-move="scissors">
+        <img src="images/paper.png" alt="Scissors">
+      </button>
     </div>
-    <div class="score-list">
-        <div>
-            <p id="user-list">0</p>
-            <p>You</p>
-        </div>
-        <div>
-            <p id="computer-score">0</p>
-            <p>Computer</p>
-        </div>
-        <div>
-            <p id="draw-score">0</p>
-            <p>Draw</p>
-        </div>
+
+    <div class="result-row">
+      <div>
+        <h3>Your choice</h3>
+        <span id="player-choice">-</span>
+      </div>
+      <div>
+        <h3>Computer choice</h3>
+        <span id="computer-choice">-</span>
+      </div>
     </div>
-    <div>
-        <button id="message">Pick your Move</button>
-    </div>
-    <script src="script.js"></script>
+
+    <button id="reset-btn">Reset Game</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
