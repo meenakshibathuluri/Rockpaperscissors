@@ -1,84 +1,76 @@
-let rockElement = document.getElementById("rock");
-let paperElement = document.getElementById("paper");
-let scissorsElement = document.getElementById("scissors");
+const choices = document.querySelectorAll(".choice");
+const playerScoreSpan = document.getElementById("player-score");
+const computerScoreSpan = document.getElementById("computer-score");
+const message = document.getElementById("message");
+const playerChoiceSpan = document.getElementById("player-choice");
+const computerChoiceSpan = document.getElementById("computer-choice");
+const resetBtn = document.getElementById("reset-btn");
 
-let userScore = document.getElementById("user-score");
-let computerScore = document.getElementById("computer-score");
-let drawScore = document.getElementById("draw-score");
+let playerScore = 0;
+let computerScore = 0;
 
-let messageElement = document.getElementById("message");
+choices.forEach(choice => {
+  choice.addEventListener("click", () => {
+    const playerMove = choice.dataset.move;
+    const computerMove = getComputerMove();
 
-let turnElement = document.querySelector(".trun-message");
+    highlightChoice(choice);
+    updateChoicesText(playerMove, computerMove);
+    updateScores(playerMove, computerMove);
+  });
+});
 
-let user = 0;
-let computer = 0;
-let draw = 0;
+resetBtn.addEventListener("click", resetGame);
 
-let fristPlayer = true;
-
-let choices = ["rock", "paper", "scissor"];
-
-let player1Choice = "";
-let player2Choice = "";
-
-function updateScores() {
-    if (player1Choice == player2Choice) {
-        draw++;
-        drawScore.innerText = draw;
-        messageElement.innerText = "It's Draw";
-        messageElement.style.backgroundColor = "black";
-        player1Choice = "";
-        player2Choice = "";
-        fristPlayer = true;
-
-        turnElement.innerText = "Player 1 Turn";
-    } else if (
-        (player1Choice == "rock" && player2Choice == "scissor") ||
-        (player1Choice == "paper" && player2Choice == "rock") ||
-         (player1Choice == "scissor" && player2Choice == "paper")
-    ) {
-     user++;
-     userScore.innerText = user;
-     messageElement.innerText = 'Player1 Won! ${userChoice} beat ${player1Choice}';
-     messageElement.style.backgroundColor = "green";
-    } else {
-        computer++;
-        computerScore.innerText = computer;
-        messageElement.innerText = 'Player1 Lost! ${player2Choice} beat ${userChoice}';
-        messageElement.style.backgroundColor = "green";
-    }
+function getComputerMove() {
+  const moves = ["rock", "paper", "scissors"];
+  const randomIndex = Math.floor(Math.random() * moves.length);
+  return moves[randomIndex];
 }
 
-rockElement.addEventListener("click", () => {
-    console.log("inside rock");
-    if (fristPlayer) {
-        player1Choice = "rock";
-        fristPlayer = false;
-        turnElement.innerText = "Player 2 Turn";
-    } else {
-        player2Choice = "rock";
-        updateScores();
-    }
-});
+function highlightChoice(activeChoice) {
+  choices.forEach(btn => btn.classList.remove("active"));
+  activeChoice.classList.add("active");
+}
 
-paperElement.addEventListener("click", () => {
-    if (fristPlayer) {
-        player1Choice = "paper";
-        fristPlayer = false;
-        turnElement.innerText = "Player 2 Turn";
-    } else {
-        player2Choice = "paper";
-        updateScores();
-    }
-});
+function updateChoicesText(playerMove, computerMove) {
+  playerChoiceSpan.textContent = capitalize(playerMove);
+  computerChoiceSpan.textContent = capitalize(computerMove);
+}
 
-scissorsElement.addEventListener("click", () => {
-    if (fristPlayer) {
-        player1Choice = "scissors";
-        fristPlayer = false;
-        turnElement.innerText = "Player 2 Turn";
-    } else {
-        player2Choice = "scissors";
-        updateScores();
-    }
-});
+function updateScores(playerMove, computerMove) {
+  if (playerMove === computerMove) {
+    message.textContent = "It's a draw!";
+    return;
+  }
+
+  const playerWins =
+    (playerMove === "rock" && computerMove === "scissors") ||
+    (playerMove === "paper" && computerMove === "rock") ||
+    (playerMove === "scissors" && computerMove === "paper");
+
+  if (playerWins) {
+    playerScore++;
+    playerScoreSpan.textContent = playerScore;
+    message.textContent = "Congratulations!! You win this round!";
+  } else {
+    computerScore++;
+    computerScoreSpan.textContent = computerScore;
+    message.textContent = "Computer wins this round!";
+  }
+}
+
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreSpan.textContent = "0";
+  computerScoreSpan.textContent = "0";
+  message.textContent = "Choose your move";
+  playerChoiceSpan.textContent = "-";
+  computerChoiceSpan.textContent = "-";
+  choices.forEach(btn => btn.classList.remove("active"));
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
