@@ -4,14 +4,12 @@
     margin: 0;
     text-align: center;
 }
-
 h1 {
     color: white;
     background-color: rgba(0, 0, 0, 0.827);
     height: 70px;
     line-height: 70px;
 }
-
 .choice {
     height: 170px;
     width: 170px;
@@ -20,20 +18,17 @@ h1 {
     justify-content: center;
     border-radius: 50%;
 }
-
 .choice:hover {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.791);
 
 }
-
 img {
     height: 160px;
     width: 160px;
     border-radius: 50%;
     object-fit: cover;
 }
-
 .choices {
     display: flex;
     align-items: center;
@@ -41,7 +36,6 @@ img {
     gap: 30px;
     margin-top: 30px;
 }
-
 .score-list {
     display: flex;
     justify-content: center;
@@ -50,7 +44,6 @@ img {
     gap: 50px;
     font-size: 40px;
 }
-
 #message {
     margin-top: 40px;
     border: none;
@@ -60,7 +53,6 @@ img {
     font-size: 30px;
     border-radius: 5px;
 }
-
 .turn-message {
     margin-top: 20px;
     font-size: 20px;
